@@ -3,7 +3,7 @@ class Human:
         self.name = name
         
 class Patient(Human):
-    def __init__(self, name, symptom, patient_id):
+    def __init__(self, name, patient_id, symptom):
         super().__init__(name)
     
         self.symptom = symptom
@@ -47,7 +47,7 @@ class Clinic:
         
     def _check_reserved(self, patient):
         for p in self.patient_list:
-            if patient == p:
+            if patient.patient_id == p.patient_id:
                 return True
         return False
 
@@ -58,8 +58,7 @@ patients = [["佐藤", "111", "咳"],
             ["田中", "222", "腹痛"],
             ["鈴木", "333", "鼻水"],
             ["山田", "444", "倦怠感"],
-            ["中田", "555", "インフル"],
-            ["山田", "444", "倦怠感"],]
+            ["中田", "555", "インフル"],]
 
 for p in patients:
     patient = Patient(p[0], p[1], p[2])
@@ -67,3 +66,9 @@ for p in patients:
     myclinic.reserve(patient)
 
 myclinic.show_waiting_counts()
+
+me = Patient("中田", "555", "インフル")
+myclinic.reserve(me)
+myclinic.show_waiting_counts()
+
+myclinic.diagnosis()
