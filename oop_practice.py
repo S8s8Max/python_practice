@@ -31,7 +31,7 @@ class Clinic:
         if patient_id == None:
             if len(self.patient_list) > 0:
                 patient = self.patient_list[0]
-                
+                self.patient_list.remove(self.patient_list[0])
         else:
             for p in self.patient_list:
                 if p.patient_id == patient_id:
@@ -51,24 +51,22 @@ class Clinic:
                 return True
         return False
 
+if __name__ == "__main__":
+    myclinic = Clinic()
 
-myclinic = Clinic()
+    patients = [["佐藤", "111", "咳"],
+                ["田中", "222", "腹痛"],
+                ["鈴木", "333", "鼻水"],
+                ["山田", "444", "倦怠感"],
+                ["中田", "555", "インフル"],]
 
-patients = [["佐藤", "111", "咳"],
-            ["田中", "222", "腹痛"],
-            ["鈴木", "333", "鼻水"],
-            ["山田", "444", "倦怠感"],
-            ["中田", "555", "インフル"],]
-
-for p in patients:
-    patient = Patient(p[0], p[1], p[2])
+    for p in patients:
+        patient = Patient(p[0], p[1], p[2])
     
-    myclinic.reserve(patient)
+        myclinic.reserve(patient)
 
-myclinic.show_waiting_counts()
+        myclinic.show_waiting_counts()
 
-me = Patient("中田", "555", "インフル")
-myclinic.reserve(me)
-myclinic.show_waiting_counts()
-
-myclinic.diagnosis()
+    me = Patient("中田", "555", "インフル")
+    myclinic.reserve(me)
+    myclinic.show_waiting_counts()
